@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Análisis de la Constitución y la Participación Ciudadana</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(135deg, #ffcd00, #003893, #c8102e);
+        background-size: 400% 400%;
+        animation: gradient-animation 15s ease infinite;
+        color: #1a202c;
+        line-height: 1.6;
+        overflow: hidden; /* Oculta el scroll para la presentación a pantalla completa */
+      }
+
+      @keyframes gradient-animation {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .slide {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 2rem;
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        flex-direction: column;
+        opacity: 0;
+        transform: scale(0.95);
+        transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+      }
+      .slide.active {
+        opacity: 1;
+        transform: scale(1);
+        position: relative;
+      }
+      .slide-content {
+        max-width: 800px;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        padding: 3rem;
+        backdrop-filter: blur(10px);
+        transition: transform 0.3s ease;
+      }
+      .slide-content:hover {
+        transform: translateY(-5px);
+      }
+      .slide-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #003893; /* Azul de la bandera */
+        animation: slideInUp 0.6s ease-out forwards;
+      }
+      .slide.active .slide-title {
+        animation: fadeInDown 0.8s ease-out forwards;
+      }
+      .slide-text {
+        font-size: 1.25rem;
+        margin-top: 1rem;
+        color: #4a5568;
+      }
+      .button-container {
+        position: fixed;
+        bottom: 5rem; /* Ajuste para evitar la superposición */
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        z-index: 10;
+      }
+      .nav-button {
+        padding: 0.75rem 2rem;
+        font-weight: 600;
+        border-radius: 9999px;
+        background-color: #003893; /* Azul de la bandera */
+        color: white;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(0, 56, 147, 0.3);
+      }
+      .nav-button:hover {
+        background-color: #c8102e; /* Rojo de la bandera */
+        transform: translateY(-2px);
+      }
+      .nav-button:disabled {
+        background-color: #a0aec0;
+        cursor: not-allowed;
+        box-shadow: none;
+      }
+      .image-container {
+        margin-top: 2rem;
+        max-width: 40%;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Animaciones */
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      #progress-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 8px;
+        background-color: #ffcd00; /* Amarillo de la bandera */
+        width: 0;
+        transition: width 0.4s ease-in-out;
+        z-index: 20;
+      }
+      .footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        padding: 1rem;
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        font-size: 0.875rem;
+        z-index: 5;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div id="progress-bar"></div>
+
+    <div
+      id="presentation-container"
+      class="relative w-full h-screen overflow-hidden"
+    >
+      <div id="slide-1" class="slide active">
+        <div class="slide-content">
+          <h1 class="slide-title">Análisis de la Constitución de Colombia</h1>
+          <p class="slide-text">
+            Exploracion los principios democráticos y el papel de la
+            participación ciudadana.
+          </p>
+        </div>
+      </div>
+
+      <div id="slide-2" class="slide active">
+        <div class="slide-content">
+          <h1 class="slide-title">Principios Democráticos Fundamentales</h1>
+        </div>
+      </div>
+
+      <div id="slide-3" class="slide">
+        <div class="slide-content">
+          <h2 class="slide-title">Democracia Participativa</h2>
+          <p class="slide-text">
+            La Constitución de 1991 se basa en un pilar único: la
+            <strong> democracia participativa</strong>, modelo político que
+            busca fortalecer la participación ciudadana en la toma de decisiones
+            políticas,complementando la democracia representativa tradicional.
+          </p>
+          <!-- Imagen representativa de la democracia participativa -->
+          <div class="image-container">
+            <img
+              src="https://humanidades.com/wp-content/uploads/2019/05/democracia-participativa-e1588467293357.jpg"
+              alt="Imagen representativa de la democracia participativa"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div id="slide-4" class="slide">
+        <div class="slide-content">
+          <h2 class="slide-title">Una República pluralista</h2>
+          <p class="slide-text">
+            Refleja la voluntad de empoderar a los ciudadanos no solo a través
+            de sus representantes, sino también de forma directa. La separación
+            de poderes (legislativo, ejecutivo y judicial)
+          </p>
+          <!-- Imagen de un símbolo de derechos o justicia -->
+          <div class="image-container">
+            <img
+              src="https://www.shutterstock.com/image-vector/people-diverse-racial-ethnic-backgrounds-260nw-2205952025.jpg"
+              alt="Imagen de un símbolo de derechos o justicia"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div id="slide-5" class="slide active">
+        <div class="slide-content">
+          <h1 class="slide-title">
+            La Constitución como Instrumento de Promoción de la Ciudadanía y la
+            Participación
+          </h1>
+        </div>
+      </div>
+
+      <div id="slide-5" class="slide">
+        <div class="slide-content">
+          <h2 class="slide-title">
+            La Participación como Derecho Instrumental
+          </h2>
+          <p class="slide-text">
+            La participación es un <strong>derecho instrumental</strong> que
+            fortalece la democracia, sirviendo como un vehículo para el
+            ejercicio de otros derechos fundamentales.
+          </p>
+          <!-- Imagen de un símbolo de derechos o justicia -->
+          <div class="image-container">
+            <img
+              src="https://concepto.de/wp-content/uploads/2021/04/simbolo-de-la-justicia-e1618769470577-800x400.jpg"
+              alt="Imagen de un símbolo de derechos o justicia"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div id="slide-6" class="slide">
+        <div class="slide-content">
+          <h2 class="slide-title">Mecanismos de Participación</h2>
+          <ul class="list-disc list-inside text-left mx-auto slide-text mt-4">
+            <li><strong>Voto Popular:</strong> Elección de representantes.</li>
+            <li>
+              <strong>Referendo y Plebiscito:</strong> Aprobación o rechazo de
+              leyes.
+            </li>
+            <li>
+              <strong>Consulta Popular:</strong> Decisión sobre asuntos locales.
+            </li>
+            <li>
+              <strong>Iniciativa Popular:</strong>Propuesta de leyes por la
+              ciudadanía.
+            </li>
+          </ul>
+          <!-- Imagen de una urna de votación -->
+          <div class="image-container">
+            <img
+              src="https://www.registraduria.gov.co/IMG/logo/comunicado112.jpg?1679527603"
+              alt="Imagen de una urna de votación"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div id="slide-7" class="slide">
+        <div class="slide-content">
+          <h2 class="slide-title">El Papel de la Corte Constitucional</h2>
+          <p class="slide-text">
+            La jurisprudencia de la Corte ha sido crucial para fortalecer y
+            desarrollar la participación, asegurando que estos mecanismos sean
+            herramientas efectivas para la ciudadanía. La participación se
+            entiende, en este marco, como una forma de control sobre el poder
+            político, lo que garantiza una rendición de cuentas constante y
+            fortalece la confianza en las instituciones democráticas
+          </p>
+         
+        </div>
+      </div>
+
+      <div id="slide-8" class="slide">
+        <div class="slide-content">
+          <h2 class="slide-title">Conclusión</h2>
+          <p class="slide-text">
+            La Constitución de 1991 es un hito por formalizar una democracia
+            dinámica donde se establecern mecanismos directos de participación y
+            se consagran los derechos de los ciudadanos a influir en los asuntos
+            públicos, la Constitución se convierte en un instrumento activo para
+            la formación de una ciudadanía comprometida y el fortalecimiento de
+            la legitimidad democrática.
+          </p>
+          <!-- Espacio para un video. Puedes pegar el código de un video de YouTube o de otra plataforma aquí -->
+          <div class="image-container"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="button-container">
+      <button id="prev-button" class="nav-button" disabled>Anterior</button>
+      <button id="next-button" class="nav-button">Siguiente</button>
+    </div>
+
+    <footer class="footer">
+      <p>&copy; Presentado por: Andres Felipe Alban Diaz</p>
+    </footer>
+
+    <script>
+      const slides = document.querySelectorAll(".slide");
+      const nextButton = document.getElementById("next-button");
+      const prevButton = document.getElementById("prev-button");
+      const progressBar = document.getElementById("progress-bar");
+      let currentSlide = 0;
+
+      function updateProgressBar() {
+        const progress = (currentSlide / (slides.length - 1)) * 100;
+        progressBar.style.width = `${progress}%`;
+      }
+
+      // Function to read the content of the current slide
+      function readSlideContent() {
+        // Cancel any current speech synthesis to prevent overlap
+        window.speechSynthesis.cancel();
+
+        // Get the active slide element
+        const activeSlide = document.querySelector(".slide.active");
+
+        // Extract the title and text content
+        const title =
+          activeSlide.querySelector(".slide-title")?.textContent || "";
+        const textContent = activeSlide.querySelector(".slide-text");
+        let fullText = title;
+
+        // Handle both simple paragraphs and lists
+        if (textContent) {
+          if (textContent.tagName === "P") {
+            fullText += ". " + textContent.textContent;
+          } else if (textContent.tagName === "UL") {
+            const listItems = textContent.querySelectorAll("li");
+            listItems.forEach((item) => {
+              fullText += ". " + item.textContent;
+            });
+          }
+        }
+
+        // Create a new speech utterance
+        const utterance = new SpeechSynthesisUtterance(fullText);
+        // Set the language to Spanish
+        utterance.lang = "es-ES";
+
+        // Speak the text
+        window.speechSynthesis.speak(utterance);
+      }
+
+      function showSlide(index) {
+        slides.forEach((slide, i) => {
+          slide.classList.remove("active");
+          if (i === index) {
+            slide.classList.add("active");
+          }
+        });
+        updateButtons(index);
+        updateProgressBar();
+      }
+
+      function updateButtons(index) {
+        prevButton.disabled = index === 0;
+        nextButton.disabled = index === slides.length - 1;
+      }
+
+      nextButton.addEventListener("click", () => {
+        if (currentSlide < slides.length - 1) {
+          currentSlide++;
+          showSlide(currentSlide);
+          readSlideContent();
+        }
+      });
+
+      prevButton.addEventListener("click", () => {
+        if (currentSlide > 0) {
+          currentSlide--;
+          showSlide(currentSlide);
+          readSlideContent();
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowRight" || event.key === " ") {
+          if (currentSlide < slides.length - 1) {
+            currentSlide++;
+            showSlide(currentSlide);
+            readSlideContent();
+          }
+        } else if (event.key === "ArrowLeft") {
+          if (currentSlide > 0) {
+            currentSlide--;
+            showSlide(currentSlide);
+            readSlideContent();
+          }
+        }
+      });
+
+      // Initial state
+      showSlide(currentSlide);
+    </script>
+  </body>
+</html>
